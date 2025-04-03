@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Bookworm Haven</title>
+    <style>
+        /* Basic Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        nav {
+            background-color: #34495e;
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #1abc9c;
+        }
+        
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 1em;
+        }
+        
+        .error {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 3px;
+            display: block;
+            margin: 30px auto 0;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #1abc9c;
+        }
+        
+        .success-message {
+            background-color: #2ecc71;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 3px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+        
+        /* Password strength indicator */
+        .password-strength {
+            height: 5px;
+            margin-top: 5px;
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 3px;
+        }
+        
+        .strength-bar {
+            height: 100%;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .weak {
+            background-color: #e74c3c;
+        }
+        
+        .medium {
+            background-color: #f39c12;
+        }
+        
+        .strong {
+            background-color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">📚 Bookworm Haven</div>
+        <div class="tagline">Where Words Come to Life</div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Bestsellers</a></li>
+            <li><a href="#">New Releases</a></li>
+            <li><a href="#">Deals</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <h1>Create Your Bookworm Haven Account</h1>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="fullName">Full Name*</label>
+                <input type="text" id="fullName" required>
+                <div class="error" id="fullNameError">Please enter your full name</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address*</label>
+                <input type="email" id="email" required>
+                <div class="error" id="emailError">Please enter a valid email address</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password*</label>
+                <input type="password" id="password" required>
+                <div class="password-strength">
+                    <div class="strength-bar" id="strengthBar"></div>
+                </div>
+                <div class="error" id="passwordError">Password must be at least 8 characters with letters, numbers, and special characters</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password*</label>
+                <input type="password" id="confirmPassword" required>
+                <div class="error" id="confirmPasswordError">Passwords do not match</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone">
+                <div class="error" id="phoneError">Please enter a valid phone number</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthdate">Date of Birth*</label>
+                <input type="date" id="birthdate" required>
+                <div class="error" id="birthdateError">You must be at least 13 years old to register</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="favoriteGenre">Favorite Book Genre*</label>
+                <select id="favoriteGenre" required>
+                    <option value="">-- Select a genre --</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="scifi">Science Fiction</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="romance">Romance</option>
+                    <option value="biography">Biography</option>
+                    <option value="history">History</option>
+                    <option value="childrens">Children's Books</option>
+                    <option value="other">Other</option>
+                </select>
+                <div class="error" id="genreError">Please select your favorite genre</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="aboutMe">Tell Us About Yourself</label>
+                <textarea id="aboutMe" rows="4"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <input type="checkbox" id="newsletter" style="width: auto;">
+                <label for="newsletter" style="display: inline-block; margin-left: 5px;">Subscribe to our newsletter</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="checkbox" id="termsAgree" required style="width: auto;">
+                <label for="termsAgree" style="display: inline-block; margin-left: 5px;">I agree to the Terms and Conditions*</label>
+                <div class="error" id="termsError">You must agree to the terms and conditions</div>
+            </div>
+            
+            <button type="submit">Create Account</button>
+            
+            <div class="success-message" id="successMessage">
+                <h3>Registration Successful!</h3>
+                <p>Welcome to Bookworm Haven! You'll be redirected to the homepage shortly.</p>
+            </div>
+        </form>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Bookworm Haven. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Form validation
+        const form = document.getElementById('registrationForm');
+        const fullName = document.getElementById('fullName');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const phone = document.getElementById('phone');
+        const birthdate = document.getElementById('birthdate');
+        const favoriteGenre = document.getElementById('favoriteGenre');
+        const termsAgree = document.getElementById('termsAgree');
+        const successMessage = document.getElementById('successMessage');
+        const strengthBar = document.getElementById('strengthBar');
+        
+        // Error elements
+        const fullNameError = document.getElementById('fullNameError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        const phoneError = document.getElementById('phoneError');
+        const birthdateError = document.getElementById('birthdateError');
+        const genreError = document.getElementById('genreError');
+        const termsError = document.getElementById('termsError');
+        
+        // Password strength checker
+        password.addEventListener('input', function() {
+            const value = password.value;
+            let strength = 0;
+            
+            // Check length
+            if (value.length >= 8) {
+                strength += 1;
+            }
+            
+            // Check for numbers
+            if (/\d/.test(value)) {
+                strength += 1;
+            }
+            
+            // Check for uppercase letters
+            if (/[A-Z]/.test(value)) {
+                strength += 1;
+            }
+            
+            // Check for lowercase letters
+            if (/[a-z]/.test(value)) {
+                strength += 1;
+            }
+            
+            // Check for special characters
+            if (/[^A-Za-z0-9]/.test(value)) {
+                strength += 1;
+            }
+            
+            // Update strength bar
+            strengthBar.className = 'strength-bar';
+            
+            if (strength <= 2) {
+                strengthBar.classList.add('weak');
+                strengthBar.style.width = '33%';
+            } else if (strength <= 4) {
+                strengthBar.classList.add('medium');
+                strengthBar.style.width = '66%';
+            } else {
+                strengthBar.classList.add('strong');
+                strengthBar.style.width = '100%';
+            }
+        });
+        
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+            
+            // Validate full name
+            if (fullName.value.trim() === '') {
+                fullNameError.style.display = 'block';
+                isValid = false;
+            } else {
+                fullNameError.style.display = 'none';
+            }
+            
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+            
+            // Validate password
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+            if (!passwordRegex.test(password.value)) {
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+            
+            // Validate confirm password
+            if (password.value !== confirmPassword.value) {
+                confirmPasswordError.style.display = 'block';
+                isValid = false;
+            } else {
+                confirmPasswordError.style.display = 'none';
+            }
+            
+            // Validate phone if provided
+            if (phone.value.trim() !== '') {
+                const phoneRegex = /^\d{10}$/;
+                if (!phoneRegex.test(phone.value)) {
+                    phoneError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    phoneError.style.display = 'none';
+                }
+            }
+            
+            // Validate birthdate (13+ years old)
+            if (birthdate.value) {
+                const today = new Date();
+                const birthDate = new Date(birthdate.value);
+                const age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                if (age < 13 || (age === 13 && monthDiff < 0)) {
+                    birthdateError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    birthdateError.style.display = 'none';
+                }
+            } else {
+                birthdateError.style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate favorite genre
+            if (favoriteGenre.value === '') {
+                genreError.style.display = 'block';
+                isValid = false;
+            } else {
+                genreError.style.display = 'none';
+            }
+            
+            // Validate terms agreement
+            if (!termsAgree.checked) {
+                termsError.style.display = 'block';
+                isValid = false;
+            } else {
+                termsError.style.display = 'none';
+            }
+            
+            // If form is valid, show success message
+            if (isValid) {
+                form.reset();
+                successMessage.style.display = 'block';
+                
+                // Redirect to homepage after 3 seconds
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
